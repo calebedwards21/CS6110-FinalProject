@@ -1,10 +1,11 @@
 
 def get_voter_info(voter):
-        # Get Voter Info
+    # Get Voter Info
     # ---------------------------------------------------------------------------
     print(f'\nWelcome Voter {voter}, Please enter the following info to vote...')
     print("---------------------------------------------------------")
 
+    # Get first name
     inputFlag = True
     while inputFlag:
         firstName = input("First Name: ")
@@ -14,6 +15,7 @@ def get_voter_info(voter):
         else:
             inputFlag = False
 
+    # Get last name
     inputFlag = True
     while inputFlag:
         lastName = input("Last Name: ")
@@ -23,6 +25,7 @@ def get_voter_info(voter):
         else:
             inputFlag = False
 
+    # Get date of birth
     inputFlag = True
     while inputFlag:
         dateOfBirth = input("Date of Birth (MMDDYYYY): ")
@@ -31,6 +34,7 @@ def get_voter_info(voter):
         else:
             inputFlag = False
 
+    # Get social security number
     inputFlag = True
     while inputFlag:
         social = input("Social Security Number (No Dashes or Spaces): ")
@@ -42,6 +46,7 @@ def get_voter_info(voter):
 
     return firstName, lastName, dateOfBirth, social
 
+
 def get_votes():
     votes = []
     candidates = ['a', 'b', 'c', 'd', 'e']
@@ -49,65 +54,18 @@ def get_votes():
     print("Rank the candidates from favorite (1) to least favorite (5)")
     print("-----------------------------------------------------------")
 
-    # 1st Ranking
-    voteFlag = True
-    while voteFlag:
-        vote = (input("(1) = "))
-        vote = vote.lower()
-        if vote in candidates:
-            votes.append(vote)
-            candidates.remove(vote)
-            voteFlag = False
-        else:
-            print("** Invalid Input. Try Again **")
-
-    # 2nd Ranking
-    voteFlag = True
-    while voteFlag:
-        vote = (input("(2) = "))
-        vote = vote.lower()
-        if vote in candidates:
-            votes.append(vote)
-            candidates.remove(vote)
-            voteFlag = False
-        else:
-            print("** Invalid Input. Try Again **")
-
-    # 3rd Ranking
-    voteFlag = True
-    while voteFlag:
-        vote = (input("(3) = "))
-        vote = vote.lower()
-        if vote in candidates:
-            votes.append(vote)
-            candidates.remove(vote)
-            voteFlag = False
-        else:
-            print("** Invalid Input. Try Again **")
-
-    # 4th Ranking
-    voteFlag = True
-    while voteFlag:
-        vote = (input("(4) = "))
-        vote = vote.lower()
-        if vote in candidates:
-            votes.append(vote)
-            candidates.remove(vote)
-            voteFlag = False
-        else:
-            print("** Invalid Input. Try Again **")
-
-    # 5th Ranking
-    voteFlag = True
-    while voteFlag:
-        vote = (input("(5) = "))
-        vote = vote.lower()
-        if vote in candidates:
-            votes.append(vote)
-            candidates.remove(vote)
-            voteFlag = False
-        else:
-            print("** Invalid Input. Try Again **")
+    # Get 5 votes
+    for i in range(5):
+        voteFlag = True
+        while voteFlag:
+            vote = (input(f'({i+1}) = '))
+            vote = vote.lower()
+            if vote in candidates:
+                votes.append(vote)
+                candidates.remove(vote)
+                voteFlag = False
+            else:
+                print("** Invalid Input. Try Again **")
 
     return votes
 
