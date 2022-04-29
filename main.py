@@ -1,7 +1,6 @@
 
 def get_voter_info(voter):
     # Get Voter Info
-    # ---------------------------------------------------------------------------
     print(f'\nWelcome Voter {voter}, Please enter the following info to vote...')
     print("---------------------------------------------------------")
 
