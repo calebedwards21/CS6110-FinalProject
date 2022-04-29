@@ -44,5 +44,12 @@ class CentralAuthority:
             return True
         else:
             return False
-    
+        
+        
+    def get_winner(self):
+        '''
+            Get the winner from the borda protocol
+        '''
+        for votes in self.blockchain['votes']:
+            pass
     

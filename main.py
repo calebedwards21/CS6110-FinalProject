@@ -107,12 +107,21 @@ if __name__ == "__main__":
         if not central_authority.set_blockchain(block2, hash2):
             raise Exception('Cannot Add New Block')
     print(central_authority.get_blockchain())    
-    # firstName2, lastName2, dateOfBirth2, social2 = get_voter_info(2)
-    # central_authority.add_voter(firstName2, lastName2, dateOfBirth2, social2)
-    # votes2 = get_votes()
 
     # Voter 3
-    firstName3, lastName3, dateOfBirth3, social3 = get_voter_info(3)
-    central_authority.add_voter(firstName3, lastName3, dateOfBirth3, social3)
-    votes3 = get_votes()
-
+    v3 = get_voter_info(3)
+    voter3 = Voter(v3[0], v3[1], v3[2], v3[3], None)
+    if central_authority.add_voter(voter3):
+        votes3 = get_votes()
+        block_chain3, hashes3 = central_authority.get_blockchain()
+        (block3, hash3) = voter3.add_block(votes3, block_chain3, hashes3)
+        if not block3:
+            raise Exception('Current BlockChain is Invalid')
+        if not central_authority.set_blockchain(block3, hash3):
+            raise Exception('Cannot Add New Block')
+    print(central_authority.get_blockchain())
+    
+    
+    # Central Authority produce winner
+    # winner = central_authority.get_winner()
+    # Encrypt and Decrypt
