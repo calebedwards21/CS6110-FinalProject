@@ -1,3 +1,8 @@
+from ast import Raise
+from distutils.log import error
+from logging import exception
+from central_authority import CentralAuthority
+from voter import Voter
 
 def get_voter_info(voter):
     # Get Voter Info
@@ -43,7 +48,7 @@ def get_voter_info(voter):
             inputFlag = False
     print('\n')
 
-    return firstName, lastName, dateOfBirth, social
+    return (firstName, lastName, dateOfBirth, social)
 
 
 def get_votes():
@@ -69,28 +74,31 @@ def get_votes():
     return votes
 
 if __name__ == "__main__":
+    
+    central_authority = CentralAuthority()
 
-    # Get Voter 1 Info
-    firstName1, lastName1, dateOfBirth1, social1 = get_voter_info(1)
+    # Voter 1
+    v1 = get_voter_info(1)
+    voter1 = Voter(v1[0], v1[1], v1[2], v1[3], None)
+    if central_authority.add_voter(voter1):
+        votes1 = get_votes()
+        block_chain1, hashes1 = central_authority.get_blockchain()
+        (block1, hash1) = voter1.create_block(votes1, block_chain1, hashes1)
+        if not block1:
+            raise Exception('Current BlockChain is Invalid')
+        if not central_authority.set_blockchain(block1, hash1):
+            raise Exception('Cannot Add New Block')
+    print(central_authority.get_blockchain())
+        
+    
 
-    # Verify Voter 1
-
-    # Get Voter 1 Votes
-    votes1 = get_votes()
-
-    # Get Voter 2 Info
+    # Voter 2
     firstName2, lastName2, dateOfBirth2, social2 = get_voter_info(2)
-
-    # Verify Voter 2
-
-    # Get Voter 2 Votes
+    central_authority.add_voter(firstName2, lastName2, dateOfBirth2, social2)
     votes2 = get_votes()
 
-    # Get Voter 3 Info
+    # Voter 3
     firstName3, lastName3, dateOfBirth3, social3 = get_voter_info(3)
-
-    # Verify Voter 3
-
-    # Get Voter 3 Votes
+    central_authority.add_voter(firstName3, lastName3, dateOfBirth3, social3)
     votes3 = get_votes()
 
