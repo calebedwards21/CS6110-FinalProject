@@ -1,6 +1,3 @@
-from ast import Raise
-from distutils.log import error
-from logging import exception
 from central_authority import CentralAuthority
 from voter import Voter
 
@@ -83,7 +80,11 @@ if __name__ == "__main__":
     if central_authority.add_voter(voter1):
         votes1 = get_votes()
         block_chain1, hashes1 = central_authority.get_blockchain()
-        (block1, hash1) = voter1.create_block(votes1, block_chain1, hashes1)
+        print(block_chain1)
+        print(hashes1)
+        (block1, hash1) = voter1.add_block(votes1, block_chain1, hashes1)
+        print(block1)
+        print(hash1)
         if not block1:
             raise Exception('Current BlockChain is Invalid')
         if not central_authority.set_blockchain(block1, hash1):
@@ -93,9 +94,22 @@ if __name__ == "__main__":
     
 
     # Voter 2
-    firstName2, lastName2, dateOfBirth2, social2 = get_voter_info(2)
-    central_authority.add_voter(firstName2, lastName2, dateOfBirth2, social2)
-    votes2 = get_votes()
+    v2 = get_voter_info(2)
+    voter2 = Voter(v2[0], v2[1], v2[2], v2[3], None)
+    if central_authority.add_voter(voter2):
+        votes2 = get_votes()
+        block_chain2, hashes2 = central_authority.get_blockchain()
+        print(block_chain2)
+        print(hashes2)
+        (block2, hash2) = voter2.add_block(votes2, block_chain2, hashes2)
+        if not block2:
+            raise Exception('Current BlockChain is Invalid')
+        if not central_authority.set_blockchain(block2, hash2):
+            raise Exception('Cannot Add New Block')
+    print(central_authority.get_blockchain())    
+    # firstName2, lastName2, dateOfBirth2, social2 = get_voter_info(2)
+    # central_authority.add_voter(firstName2, lastName2, dateOfBirth2, social2)
+    # votes2 = get_votes()
 
     # Voter 3
     firstName3, lastName3, dateOfBirth3, social3 = get_voter_info(3)

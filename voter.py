@@ -13,7 +13,7 @@ class Voter:
         self.pk = pk
         
         
-    def create_block(self, votes, block_chain=None, hashes=None):
+    def add_block(self, votes, block_chain=None, hashes=None):
         '''
         '''
         block = {}
@@ -27,11 +27,12 @@ class Voter:
             block['ssn'] = self.ssn # Encrypt
             block['votes'] = votes
             block_chain.append(block)
-            block_hash = hash(Hash(block_chain))
+            block_hash = compute_hash(block_chain)
             hashes.append(block_hash)
-            return (block, hashes)
+            return (block_chain, hashes)
         # Create             
         else:
+            print('Chain is not empty')
             isVerified = verify_chain(block_chain, hashes)
             if not isVerified:
                 return None
@@ -42,6 +43,6 @@ class Voter:
                 block['ssn'] = self.ssn # Encrypt
                 block['votes'] = votes
                 block_chain.append(block)
-                new_hash = hash(block_chain)
+                new_hash = compute_hash(block_chain)
                 hashes.append(new_hash)
                 return (block_chain, hashes)
