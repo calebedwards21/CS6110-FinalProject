@@ -73,11 +73,13 @@ def get_votes():
 if __name__ == "__main__":
     
     central_authority = CentralAuthority()
+    ca_pub_key = central_authority.get_pub_key()
 
     # Voter 1
     v1 = get_voter_info(1)
-    voter1 = Voter(v1[0], v1[1], v1[2], v1[3], None)
-    if central_authority.add_voter(voter1):
+    voter1 = Voter(v1[0], v1[1], v1[2], v1[3], ca_pub_key)
+    
+    if central_authority.add_voter(voter1.get_info()):
         votes1 = get_votes()
         block_chain1, hashes1 = central_authority.get_blockchain()
         print(block_chain1)
@@ -95,8 +97,8 @@ if __name__ == "__main__":
 
     # Voter 2
     v2 = get_voter_info(2)
-    voter2 = Voter(v2[0], v2[1], v2[2], v2[3], None)
-    if central_authority.add_voter(voter2):
+    voter2 = Voter(v2[0], v2[1], v2[2], v2[3], ca_pub_key)
+    if central_authority.add_voter(voter2.get_info()):
         votes2 = get_votes()
         block_chain2, hashes2 = central_authority.get_blockchain()
         print(block_chain2)
@@ -110,8 +112,8 @@ if __name__ == "__main__":
 
     # Voter 3
     v3 = get_voter_info(3)
-    voter3 = Voter(v3[0], v3[1], v3[2], v3[3], None)
-    if central_authority.add_voter(voter3):
+    voter3 = Voter(v3[0], v3[1], v3[2], v3[3], ca_pub_key)
+    if central_authority.add_voter(voter3.get_info()):
         votes3 = get_votes()
         block_chain3, hashes3 = central_authority.get_blockchain()
         (block3, hash3) = voter3.add_block(votes3, block_chain3, hashes3)

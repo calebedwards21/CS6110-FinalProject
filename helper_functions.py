@@ -18,11 +18,11 @@ def compute_hash(block_chain):
     '''
         Computes the hash of the blockchain
     '''
-    hash_string = '' 
+    hash_string = b''
     for c in block_chain:
         hash_string += c['fn'] + c['ln'] + c['dob'] + c['ssn']
         for v in c['votes']:
-            hash_string += v
+            hash_string += v.encode()
     return hash(hash_string)
 
 # class Hash:

@@ -1,5 +1,7 @@
 from copy import deepcopy
 from helper_functions import *
+from cryptography.fernet import Fernet
+import rsa
 
 class CentralAuthority:
     
@@ -13,17 +15,26 @@ class CentralAuthority:
         '''
         self.voters = voters
         self.blockchain = blockchain
-        self.hashes = hashes
+        self.hashes = hashes                
+        self.publicKey, self.privateKey = rsa.newkeys(512)
+        
+        
+    def get_pub_key(self):
+        '''
+            Public Key is available to everyone
+        '''
+        return self.publicKey
     
     
     def add_voter(self, voter):
         '''
             Process of adding/verifying voter with central authority
         '''
-        if voter.ssn in self.voters:
+        dec_ssn = rsa.decrypt(voter['ssn'], self.privateKey).decode()
+        if dec_ssn in self.voters:
             return False
         else:
-            self.voters[voter.ssn] = {voter}
+            self.voters[dec_ssn] = voter
             return True
         
     
