@@ -125,5 +125,5 @@ if __name__ == "__main__":
     
     
     # Central Authority produce winner
-    # winner = central_authority.get_winner()
+    central_authority.get_winner()
     # Encrypt and Decrypt
