@@ -61,7 +61,7 @@ class CentralAuthority:
         
     def get_winner(self):
         '''
-            Get the winner from the borda protocol
+            Get the winner from the borda protocol and produce visualizations
         '''
         totalVotes = []
         print("\n\n")
