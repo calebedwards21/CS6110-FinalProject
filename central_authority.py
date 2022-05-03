@@ -200,7 +200,7 @@ class CentralAuthority:
         plt.title('Borda Voting Values of 3 Voters on 5 Candidates', fontweight ='bold', fontsize = 20)
         
         plt.legend()
-        # plt.savefig('indVotes.png')
+        plt.savefig('visuals/indVotes.png')
         plt.show()
 
         # Second Plot 
@@ -216,7 +216,7 @@ class CentralAuthority:
         plt.ylabel("Total Borda Score")
         plt.legend(["Voter 1", "Voter 2", "Voter 3"])
         plt.title("Total Borda Scores for each Candidate")
-        # plt.savefig('totVotesBar.png')
+        plt.savefig('visuals/totVotesBar.png')
         plt.show()
 
         # Third Plot
@@ -235,7 +235,7 @@ class CentralAuthority:
 
         plt.title("Total Borda Scores for each Candidate")
         plt.pie(y, labels = mylabels, explode = myexplode)
-        # plt.savefig('totVotesPie.png')
+        plt.savefig('visuals/totVotesPie.png')
         plt.show() 
 
         
