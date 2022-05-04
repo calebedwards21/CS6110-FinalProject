@@ -5,8 +5,6 @@ def verify_chain(chain, hashes):
     ''' 
     verif_hash = compute_hash(chain)
     last_hash = hashes[-1]
-    print(last_hash)
-    print(verif_hash)
     
     if verif_hash != last_hash:
         return False

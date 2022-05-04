@@ -54,7 +54,6 @@ class Voter:
             return (block_chain, hashes)
         # Create             
         else:
-            print('Chain is not empty')
             isVerified = verify_chain(block_chain, hashes)
             if not isVerified:
                 return None
